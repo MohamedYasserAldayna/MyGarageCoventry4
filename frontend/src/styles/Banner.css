@@ -1,0 +1,21 @@
+.banner {
+    width: 500px;
+    height: auto;
+    text-align: center;
+    padding: 50px;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVd5w3zynRc5Q35vl0NkSwE8AAbTZtnfrW8g&s');
+    background-size: cover;
+    color: white;
+    font-size: 1.5rem;
+    height: auto;
+  }
+  
+  .banner h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  
+  .banner strong {
+    color: #ffcc00; 
+  }
+  
