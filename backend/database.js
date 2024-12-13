@@ -1,5 +1,5 @@
 const sqlite = require('sqlite3');
-const db = new sqlite.Database('mygarage.db');
+const db = new sqlite.Database('mygarage1.db');
 
 const createUserTable = `
 CREATE TABLE IF NOT EXISTS USER (
@@ -34,7 +34,9 @@ CREATE TABLE IF NOT EXISTS PRODUCT (
   IMAGE_URL TEXT,
   PART_TYPE_ID INT NOT NULL,
   SELLER_ID INT NOT NULL,
+  CAR_BRAND_ID INT NOT NULL,
   CREATED_AT TEXT DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (CAR_BRAND_ID) REFERENCES CAR_BRAND(ID),
   FOREIGN KEY (PART_TYPE_ID) REFERENCES PART_TYPE(ID),
   FOREIGN KEY (SELLER_ID) REFERENCES USER(ID)
 )`;
@@ -82,6 +84,19 @@ CREATE TABLE IF NOT EXISTS ORDER_ITEM (
   FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCT(ID)
 )`;
 
+const createCartTable = `
+CREATE TABLE IF NOT EXISTS CART (
+  ID INTEGER PRIMARY KEY AUTOINCREMENT,
+  USER_ID INT NOT NULL,
+  PRODUCT_ID INT NOT NULL,
+  QUANTITY INT NOT NULL,
+  UNIQUE USER_PRODUCT (USER_ID, PRODUCT_ID),
+  FOREIGN KEY (USER_ID) REFERENCES USER(ID),
+  FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCT(ID)
+)`;
+const alterCartTable =`
+CREATE UNIQUE INDEX USER_PRODUCT ON CART(USER_ID, PRODUCT_ID)`
+
 module.exports = {
   db,
   createUserTable,
@@ -92,4 +107,5 @@ module.exports = {
   createAppointmentTable,
   createOrderTable,
   createOrderItemsTable,
+  createCartTable,
 };
