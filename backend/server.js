@@ -6,7 +6,7 @@ const db_access = require('./database');
 const db = db_access.db;
 const cookieParser =require('cookie-parser');
 const server =express();
-const port = 5001;
+const port = 5003;
 const secret_key ='1234567800987654321qwertyuioplkjhgfdsazxcvbnm';
 
 server.use(cors({
