@@ -76,7 +76,7 @@ server.post('/user/login', (req, res) => {
             const token = generateToken(row.ID, row.ROLE);
             res.cookie('authToken', token, {
                 httpOnly: true,
-                sameSite: 'none',
+                sameSite: 'lax',
                 secure: false,
             });
             res.status(200).json({ id: row.ID, role: row.ROLE });
