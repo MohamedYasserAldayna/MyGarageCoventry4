@@ -164,6 +164,41 @@ server.get('/cart', verifyToken, (req, res) => {
 
 
 
+server.get('/users', verifyToken, (req, res) => {
+    if (req.userDetails.role !== 'admin') {
+        return res.status(403).send('Forbidden');
+    }
+
+    db.all('SELECT ID, USERNAME, EMAIL, ROLE FROM USER', (err, rows) => {
+        if (err) {
+            console.error('Error fetching users:', err);
+            return res.status(500).send('Error fetching users');
+        }
+        res.status(200).json(rows);
+    });
+});
+
+
+
+
+server.delete('/users/:id', verifyToken, (req, res) => {
+    if (req.userDetails.role !== 'admin') {
+        return res.status(403).send('Forbidden');
+    }
+
+    const userId = req.params.id;
+
+    db.run('DELETE FROM USER WHERE ID = ?', [userId], (err) => {
+        if (err) {
+            console.error('Error deleting user:', err);
+            return res.status(500).send('Error deleting user');
+        }
+        res.status(200).send('User deleted successfully');
+    });
+});
+
+
+
 server.put('/cart/update', verifyToken, (req, res) => {
     const { cartId, quantity } = req.body;
 
