@@ -31,8 +31,10 @@ const LoginPage = () => {
       // Redirect based on role
       if (role === 'admin') {
         navigate('/admin-dashboard');
+      } else if (role === 'customer') {
+        navigate('/customer-home'); // Redirect customer to homepage
       } else {
-        navigate('/');
+        setError('Unauthorized access. Invalid role.');
       }
     } catch (err) {
       console.error('Login error:', err.response?.data || err.message);

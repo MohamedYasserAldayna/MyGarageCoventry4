@@ -5,6 +5,7 @@ import AuthPage from './pages/Authpage.js';
 import LoginPage from './pages/Login.js';
 import RegisterPage from './pages/Register.js';
 import AdminDashboard from './pages/AdminDashboard.js';
+import CustomerHomePage from './pages/Home.js';
 
 const App = () => {
   // Function to get the user's role from the JWT stored in cookies
@@ -26,8 +27,7 @@ const App = () => {
 
   // Retrieve the role once
   const role = getRole();
-  console.log('User role:', role); // Debugging
-
+  console.log('User role:', role); 
   return (
     <Router>
       <Routes>
@@ -40,12 +40,14 @@ const App = () => {
         {/* Register Page */}
         <Route path="/register" element={<RegisterPage />} />
 
-        {/* Admin Dashboard - Protected Route */}
+        {/* Admin Dashboard */}
         <Route
           path="/admin-dashboard"
-          element={<AdminDashboard/>}
-            
-        />
+          element={<AdminDashboard/>}/>
+        {/* Customer Home Page */}
+        <Route 
+          path="/customer-home" 
+          element={<CustomerHomePage />} />
       </Routes>
     </Router>
   );
