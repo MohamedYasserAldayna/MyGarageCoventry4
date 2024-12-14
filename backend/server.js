@@ -76,7 +76,7 @@ server.post('/user/login', (req, res) => {
             const token = generateToken(row.ID, row.ROLE);
             res.cookie('authToken', token, {
                 httpOnly: true,
-                sameSite: 'lax',
+                sameSite: 'none',
                 secure: false,
             });
             res.status(200).json({ id: row.ID, role: row.ROLE });
@@ -249,6 +249,42 @@ server.post('/cart/checkout', verifyToken, (req, res) => {
         );
     });
 });
+
+
+server.get('/users', verifyToken, (req, res) => {
+    if (req.userDetails.role !== 'admin') {
+        return res.status(403).send('Forbidden');
+    }
+
+    db.all('SELECT ID, USERNAME, EMAIL, ROLE FROM USER', (err, rows) => {
+        if (err) {
+            console.error('Error fetching users:', err);
+            return res.status(500).send('Error fetching users');
+        }
+        res.status(200).json(rows);
+    });
+});
+
+
+
+
+
+server.delete('/users/:id', verifyToken, (req, res) => {
+    if (req.userDetails.role !== 'admin') {
+        return res.status(403).send('Forbidden');
+    }
+
+    const userId = req.params.id;
+
+    db.run('DELETE FROM USER WHERE ID = ?', [userId], (err) => {
+        if (err) {
+            console.error('Error deleting user:', err);
+            return res.status(500).send('Error deleting user');
+        }
+        res.status(200).send('User deleted successfully');
+    });
+});
+
 
 
 server.listen(port, '0.0.0.0', () => {
