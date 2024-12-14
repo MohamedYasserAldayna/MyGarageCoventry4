@@ -1,4 +1,4 @@
-/* Reset & Base Styling */
+
 html, body {
     margin: 0;
     padding: 0;
@@ -13,27 +13,27 @@ html, body {
   
   /* Centralized Container */
   .auth-container {
-    background-color: #2c5364; /* Slightly lighter teal tone */
+    background-color: #2c5364; 
     padding: 3rem 2rem;
     border-radius: 12px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4); /* Subtle depth */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4); 
     max-width: 400px;
     width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* Center content within the box */
+    align-items: center; 
   }
   
-  /* Logo Styling */
+  
   .logo {
-    width: 80px; /* Adjust logo size */
+    width: 80px; 
     height: auto;
     margin-bottom: 1.5rem;
   }
   
-  /* Typography */
+  
   h2 {
     font-size: 2rem;
     color: #ffffff;
@@ -49,13 +49,13 @@ html, body {
     text-align: center;
   }
   
-  /* Buttons Container */
+  
   .auth-buttons {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Increase spacing between buttons */
+    gap: 1.5rem; 
     width: 100%;
-    align-items: center; /* Center buttons */
+    align-items: center;
   }
   
   .auth-button {
@@ -67,7 +67,7 @@ html, body {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    width: 90%; /* Match button width with input fields */
+    width: 90%; 
     transition: transform 0.2s ease, background-color 0.3s ease;
   }
   

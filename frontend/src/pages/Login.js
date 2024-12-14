@@ -24,9 +24,9 @@ const LoginPage = () => {
       );
 
       const { role } = response.data;
+      console.log('Login successful! Role:', role);
 
       setMessage('Login successful!');
-      console.log('Login successful! Role:', role);
 
       // Redirect based on role
       if (role === 'admin') {
@@ -42,12 +42,12 @@ const LoginPage = () => {
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
+      <h2 className="page-title">Login</h2>
       {error && <div className="error">{error}</div>}
       {message && <div className="message">{message}</div>}
 
       <form onSubmit={handleLogin}>
-        <div>
+        <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -59,7 +59,7 @@ const LoginPage = () => {
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -71,7 +71,7 @@ const LoginPage = () => {
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <button type="submit">Login</button>
         </div>
       </form>

@@ -4,26 +4,29 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import AuthPage from './pages/Authpage.js';
 import LoginPage from './pages/Login.js';
 import RegisterPage from './pages/Register.js';
-import AdminDashboard from './pages/AdminDashboard.js'; // Admin Dashboard Page
+import AdminDashboard from './pages/AdminDashboard.js';
 
 const App = () => {
-  // Function to check if the logged-in user is an admin
+  // Function to get the user's role from the JWT stored in cookies
   const getRole = () => {
-    const token = document.cookie.split('; ').find((row) => row.startsWith('authToken='));
-    if (token) {
-      try {
-        // Decode the JWT payload
-        const jwtPayload = JSON.parse(atob(token.split('=')[1].split('.')[1]));
-        return jwtPayload.role; // Return the role from the JWT payload
-      } catch (error) {
-        console.error('Error decoding JWT:', error);
+    try {
+      const token = document.cookie.split('; ').find((row) => row.startsWith('authToken='));
+      if (!token) {
+        console.warn('authToken not found in cookies');
         return null;
       }
+
+      const jwtPayload = JSON.parse(atob(token.split('=')[1].split('.')[1])); // Decode JWT payload
+      return jwtPayload.role || null;
+    } catch (error) {
+      console.error('Error decoding JWT:', error);
+      return null;
     }
-    return null;
   };
 
-  const role = getRole(); // Get the user's role
+  // Retrieve the role once
+  const role = getRole();
+  console.log('User role:', role); // Debugging
 
   return (
     <Router>
@@ -40,13 +43,8 @@ const App = () => {
         {/* Admin Dashboard - Protected Route */}
         <Route
           path="/admin-dashboard"
-          element={
-            role === 'admin' ? (
-              <AdminDashboard />
-            ) : (
-              <Navigate to="/" replace={true} /> // Redirect non-admins to Auth page
-            )
-          }
+          element={<AdminDashboard/>}
+            
         />
       </Routes>
     </Router>
@@ -54,3 +52,4 @@ const App = () => {
 };
 
 export default App;
+
