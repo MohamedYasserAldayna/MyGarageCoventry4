@@ -1,0 +1,23 @@
+/* ServiceCenter.css */
+.service-center-list {
+    padding: 20px;
+  }
+  
+  .service-center-card {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .service-center-card h3 {
+    color: #333;
+    font-size: 1.5em;
+  }
+  
+  .service-center-card p {
+    font-size: 1em;
+    margin-top: 10px;
+  }
+  

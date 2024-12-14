@@ -1,12 +1,11 @@
 import React from 'react';
-import Navbar from '../components/Navbar.js';
-import Banner from '../components/Banner.js';
+import './styles/Home.css';
 
 const Home = () => {
   return (
-    <div>
-      <Navbar />
-      <Banner />
+    <div className="container">
+      <h2>Welcome to MyGarage</h2>
+      <p>Your one-stop shop for car parts, service centers, and more.</p>
     </div>
   );
 };
